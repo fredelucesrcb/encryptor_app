@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <style>
+            #generated_passwords, #table_head  {
+                font-family: "Courier New";
+            }
+        </style>
+    
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="mb-3">
+                <h2>
+                    Password Generator
+                </h2>
+                <div class="row">
+                    
+                    <div class="form-group col-md-2 mb-2">
+                        <label for="pass_count" class="sr-only">Password Count</label>
+                        <input type="text" class="form-control" id="pass_count" placeholder="Password count" value=20>
+                    </div>
+
+                    <div class="form-group col-md-2 mb-2">
+                        <label for="pass_length" class="sr-only">Password Length</label>
+                        <input type="text" class="form-control" id="pass_length" placeholder="Password length" value=10>
+                    </div>
+                </div>
+
+                <button onclick="handleGeneratePassword()" type="button" class="btn btn-primary mb-2">Generate Passwords</button>
+            </div>
+
+            <div class="mb-3">
+                <div class="mb-3">
+                    <h2>
+                        Generation Results
+                    </h2>
+                    <div>
+                        <table id="generated_passwords" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        Password String
+                                    </th>
+                                    <th scope="col">
+                                        Encrypted String
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="input-group col-sm-6 mb-2">
+                    <span class="input-group-text">PW Generator String Output</span>
+                    <textarea style="height:150px;" class="form-control" aria-label="With textarea" id="generated_text_output"></textarea>
+                </div>
+                <div>
+                    <button id="generated_text_btn" type="button" class="btn btn-success" onclick="handleCopy('generated_text_btn', 'generated_text_output')">Copy to Clipboard</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="input-group col-sm-6 mb-2">
+                    <span class="input-group-text">PW Generator Encrypted Output</span>
+                    <textarea style="height:150px;" class="form-control" aria-label="With textarea" id="generated_hash_output"></textarea>
+                </div>
+                <div>
+                    <button id="ecrypted_hash_btn" type="button" class="btn btn-success" onclick="handleCopy('ecrypted_hash_btn', 'generated_hash_output')">Copy to Clipboard</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h2>
+                    Encryptor
+                </h2>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" style="height: 150px;" placeholder="Input comma separated passwords here(remove whitespace)" id="to_encrypt"></textarea>
+                    <label for="floatingTextarea">Passwords to Encrypt(separated by new line)</label>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-info" onclick="handleEncrypt()"> Encrypt</button>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <h2>
+                    Encryption Results
+                </h2>
+                <div>
+                    <table id="table_head" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    Password String
+                                </th>
+                                <th scope="col">
+                                    Encrypted String
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="input-group mb-2">
+                    <span class="input-group-text">Encrypted Output</span>
+                    <textarea style="height:150px;" class="form-control" aria-label="With textarea" id="csv_output"></textarea>
+                </div>
+                <div>
+                    <button id="copybtn" type="button" class="btn btn-success" onclick="handleCopy('copybtn', 'csv_output')">Copy to Clipboard</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h2>
+                    Decryptor   
+                </h2>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Enter Hash" aria-describedby="button-addon2" id="to_decrypt">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="handleDecrypt()">Decrypt</button>
+                    <input type="text" disabled class="form-control" placeholder="Decrypted" aria-label="Server" id="decrypted_display">
+                </div>
+                <div>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
