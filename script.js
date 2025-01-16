@@ -6,8 +6,8 @@ const SECRET = 'secret_key'+pub_key //Change this every change password schedule
 const cap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const low = 'abcdefghijklmnopqrstuvwxyz';
 const num = '0123456789';
-const spcChar = '!_*^@$';
-const randomCat = [cap, low, num, spcChar];
+const spcChar = ['!' ,'_', '*', '^', '@', '$'];
+const randomCat = [cap, low, num];
 
 
 function cleartables(tableId){
@@ -123,12 +123,12 @@ async function checkHasMissingCharacter(string) {
         string = string.replace(string.charAt(Math.ceil((string.length - 1)/2) + 1), randomCat[2].charAt(Math.floor(Math.random()* randomCat[2].length)));
     }
 
-    if(!hasSpecialCharacters) {
-        // console.log('no special characters', string)
-        string = string.replace(string.charAt((string.length)-1), randomCat[3].charAt(Math.floor(Math.random()* randomCat[3].length)));
-    }
+    // if(!hasSpecialCharacters) {
+    //     // console.log('no special characters', string)
+    //     string = string.replace(string.charAt((string.length)-1), randomCat[3].charAt(Math.floor(Math.random()* randomCat[3].length)));
+    // }
 
-    if(hasCapitalLetters && hasSmallLetters && hasNumbers && hasSpecialCharacters) {
+    if(hasCapitalLetters && hasSmallLetters && hasNumbers) {
         return string;
     }else{
         await checkHasMissingCharacter(string);
@@ -140,8 +140,10 @@ async function checkHasMissingCharacter(string) {
 
 async function generatePassword(length){
     let pass = '';
+
+    randomNum = Math.floor(Math.random()* length);
  
-    for (let i = 1; i <= length; i++) {
+    for (let i = 1; i <= length-1; i++) {
         let selector = Math.floor(Math.random()* randomCat.length);
         let choices = randomCat[selector];
         str = choices;
@@ -156,7 +158,12 @@ async function generatePassword(length){
         pass = pass.replace(pass.charAt(0), randomCat[1].charAt(Math.floor(Math.random()* randomCat[1].length)))
     }
 
+    specialChar = spcChar[Math.floor(Math.random()* spcChar.length)]
+
     pass = await handleRemoveDuplicates(pass);
+
+    pass = pass.slice(0, randomNum) + specialChar + pass.slice(randomNum) 
+
     return pass;
 }
 
